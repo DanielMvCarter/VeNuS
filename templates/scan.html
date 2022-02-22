@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Scan - {% endblock %}
+{% block content %}
+<form action="start" method="post">
+    <p>To begin a scan, enter details below. </p>
+    <p><input type="text" value="IP Address" name="ip"/></p>
+    <input type="radio" id="Standard" name="depth" value="Standard">
+    <label for="Standard">Standard</label>
+    <input type="radio" id="Light" name="depth" value="Light">
+    <label for="Light">Light</label>
+    <input type="radio" id="Intrusive" name="depth" value="Intrusive">
+    <label for="Intrusive">Intrusive</label>
+    <p><input class="buttons" type="submit" value="Begin Scan"/></p>
+</form>
+<br>
+<br>
+<br>
+<p>Alternatively, select one of your presets. These can be updated <a href=/presets>here</a>. </p>
+<form action="start" method="post">
+<div class="dropdown">
+    <button class="dropbtn">⌄ Presets ⌄</button>
+    <div class="dropdown-content">
+        {% for preset in presets %}
+    <input class="buttons" type="submit" value={{presets[preset]['Name']}} name="ip"/>
+        {% endfor %}
+    </div>
+  </div>
+</form>
+<br>
+<br>
+<br>
+<div class="format">
+    <form action="scan/custom" method="get">
+        <button type="submit">Custom Scan</button>
+    </form>
+</div>
+<p>A scan may take some time, perhaps a redirect to the results page or something.</p>
+{% endblock %}

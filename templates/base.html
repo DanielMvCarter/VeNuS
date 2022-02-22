@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block head%}
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}VeNuS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <img class="logo" src="{{ url_for('static', filename='img/VeNuS.png') }}" class="img-circle" alt="logo" width="150" height="100">
+        <nav>
+            <ul class="navbar">
+                <li><a href="/">Home</a></li>
+                <li><a href="/results">Results</a></li>
+                <li><a href="/presets">Presets</a></li>
+            </ul>
+        </nav>
+        <a class="scanBut" href ="/scan"><button>Scan</button></a>
+    </header>
+    <br>
+    <div class="content">{% block content %}{% endblock %}</div>
+</body>
+</html>

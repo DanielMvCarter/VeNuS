@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Presets - {% endblock %}
+{% block content %}
+<div class="content">
+    {% if presets|length < 1 %}
+    <h4 style="text-align: center">There are no presets. Create one below!</h4>
+    {% else %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Details</th>
+            <th>Actions</th>
+        </tr>
+        {{presets}}
+        {% for preset in presets %}
+            <tr>
+                <td>{{presets[preset]["Name"]}}</td>
+                <td>{{presets[preset]["Details"]}}</td>
+                <td>
+                    <a href="/update/{{preset}}">Update</a>
+                    <br>
+                    <a href="/delete/{{preset}}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <div class="form">
+        <form action="/presets" method="POST">
+            <input type="text" name="user_input" id="content" value="Preset name: IP address Flags ">
+            <input type="submit" value="Add Preset">
+        </form>
+    </div>
+</div>
+{% endblock %}

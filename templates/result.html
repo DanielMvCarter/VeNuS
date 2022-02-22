@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %} Results - {% endblock %}
+{% block content %}
+<p>Once a scan has been run, the results will appear here, you can also view previous scan results to compare improvements in security. </p><br>
+{% for name in name %}
+<div class="format">
+<form action={{folder}} method="post">
+    <ul>
+        <li><input class="services" type="submit" value={{name}} name="file"></button></li>
+    </ul>   
+</form>
+</div>
+<!-- <p>There are a total of XXX vulnerabilities found within the {{name}} service. Of these vulnerabilities, solutions for YYY have been found.</p><br> -->
+{% endfor %}
+<br>
+{% if results|length <1 %}
+<p></p>
+{% else %}
+<table class="content-table">
+    <thead>
+        <tr>
+            <th>Vulnerability</th>
+            <th>CVE</th>
+            <th>CVSS</th>
+            <th>Description</th>
+            <th>Solution</th>
+        </tr>
+    </thead>
+    {% for result in results %}
+    <tbody>
+        <tr>
+            <td>{{result[0]}}</td>
+            <td>{{result[1]}}</td>
+            <td>{{result[2]}}</td>
+            <td>{{result[3]}}</td>
+            <td>{{result[4]}}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table><br>
+{% endif %}
+{% endblock %}

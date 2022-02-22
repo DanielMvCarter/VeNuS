@@ -1,0 +1,7 @@
+Scan progress
+Cvss colour 
+No patch found scanning
+Searchsploit handle
+Profiles table not updating
+Redo css
+Scan button red background

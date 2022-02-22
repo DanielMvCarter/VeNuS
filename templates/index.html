@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{% endblock %}
+{% block content %}
+VeNuS is an open source project which can be utilised to gain a quick understanding for a network's security posture. 
+It focuses on three phases: <br>
+<ol>
+    <br><li>Network scanning for host discovery, open ports and running services. <br> This is done through the Nmap tool: https://nmap.org</li> <br>
+    <li>Vulnerability scanning to identify weaknesses in the network which can be exploited by threat actors. <br>This is done through exploit-db and vulners: exploitdb : https://www.exploit-db.com </li> <br>
+    <li>Solution scanning which takes the vulnerabilities and looks for remediations that should be implemented to secure the network.<br> To find solutions identified CVEs are used to scrape patches from the NIST website: https://nvd.nist.gov</li> <br>
+</ol>
+These phases are concisely represented in a report that allows the individual to quickly identify the most severe vulnerabilities to allow for rapid reaction.
+{% endblock %}

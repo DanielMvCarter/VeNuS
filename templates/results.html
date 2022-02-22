@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %} Results - {% endblock %}
+{% block content %}
+<p>Once a scan has been run, the results will appear here, you can also view previous scan results to compare improvements in security. </p><br>
+{% for folder in folders %}
+<div class="format">
+    <form action=results/{{folder}} method="post">
+        <ul>
+            <li><input class="services" type="submit" value={{folder}} name="folder"></button></li>
+        </ul>   
+    </form>
+</div>
+{% endfor %}
+{% endblock %}

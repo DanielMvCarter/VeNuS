@@ -1,0 +1,1 @@
+{"preset1": {"Name": "Standard", "Details": "192.168.221.152 -A"}, "preset2": {"Name": "Light", "Details": "192.168.221.152 -A -T0 -sV --version-light"}, "preset3": {"Name": "Intrusive", "Details": "192.168.221.152 -A -T4 -sV --version-all"}}

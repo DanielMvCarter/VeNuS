@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Presets - {% endblock %}
+{% block content %}
+<div class="form">
+    <form action="/update/{{preset}}" method="POST">
+        <input type="text" name="user_input" id="content" value="{{preset}}">
+        <input type="submit" value="Edit">
+    </form>
+</div>
+{% endblock %}
