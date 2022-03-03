@@ -1,0 +1,397 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: #47484c;
+  font-family: "Roboto", sans-serif;
+}
+header {
+  background-color: #24252a;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 5px 10%;
+}
+.logo {
+  margin-right: auto;
+  background-color: #24252a;
+}
+.navbar li,
+a,
+button {
+  font-weight: 500;
+  font-size: 16px;
+  color: #edf0f1;
+  text-decoration: none;
+  background-color: #24252a;
+}
+.navbar {
+  list-style: none;
+  background-color: #24252a;
+}
+.navbar li {
+  display: inline-block;
+  padding: 0px 20px;
+  background-color: #24252a;
+}
+.navbar li a {
+  transition: all 0.3 ease 0s;
+  background-color: #24252a;
+}
+.navbar li a:hover {
+  color: #0088a9;
+  background-color: #24252a;
+}
+/* Styling of buttons */
+.nav_button button {
+  font-weight: bold;
+  margin-left: 20px;
+  padding: 9px 25px;
+  background-color: rgba(0, 136, 169, 1);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3 ease 0s;
+}
+.nav_button button:hover {
+  background-color: rgba(0, 136, 169, 0.8);
+}
+.buttons {
+  font-weight: bold;
+  color: white;
+  margin-left: 20px;
+  padding: 9px 25px;
+  background-color: rgba(0, 136, 169, 1);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3 ease 0s;
+}
+.buttons:hover {
+  background-color: rgba(0, 136, 169, 0.8);
+}
+.small_button {
+  font-weight: bold;
+  color: white;
+  margin-left: 10px;
+  padding: 1px 3px;
+  background-color: rgba(0, 136, 169, 1);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3 ease 0s;
+}
+.small_button:hover {
+  background-color: rgba(0, 136, 169, 0.8);
+}
+.format li {
+  list-style: none;
+}
+.content {
+  font-weight: 500;
+  font-size: 16px;
+  color: #edf0f1;
+  text-decoration: none;
+  width: 80%;
+  top: 20%;
+  position: relative;
+  transform: translate(10%);
+  text-align: center;
+}
+.blue-text {
+  color: rgba(0, 136, 169, 1);
+}
+/* Styling for tables */
+.content-table {
+  border-collapse: collapse;
+  font-size: 0.9em;
+  margin: 10px;
+  min-width: 200px;
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  transform: translate(-50, -50%);
+  table-layout: fixed;
+}
+.content-table thead tr {
+  background-color: rgba(0, 136, 169, 1);
+  text-align: left;
+  font-weight: bold;
+}
+.content-table th,
+.content-table td {
+  padding: 12px 15px;
+}
+.content-table tbody tr {
+  border-bottom: 1px solid #0088a9;
+}
+
+th {
+  background: #0088a9;
+  text-align: center;
+}
+/* Styling the dropdown box */
+.dropbtn {
+  background-color: rgba(0, 136, 169, 1);
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #47484c;
+  min-width: 160px;
+  z-index: 1;
+}
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown:hover .dropbtn {
+  background-color: rgba(0, 136, 169, 0.8);
+}
+/* Styling text fields */
+.text-field {
+  width: 50%;
+  position: relative;
+  height: 50px;
+  overflow: hidden;
+  margin: 0px 575px;
+  text-align: left;
+}
+.text-field input {
+  width: 50%;
+  height: 100%;
+  color: white;
+  padding-top: 20px;
+  border: none;
+  outline: none;
+}
+.text-field label {
+  position: absolute;
+  bottom: 0px;
+  left: 0%;
+  height: 10%;
+  width: 50%;
+  pointer-events: none;
+  border-bottom: 1px solid rgba(0, 136, 169, 0.8);
+}
+.text-field label::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  bottom: -1px;
+  height: 100%;
+  width: 100%;
+  border-bottom: 3px solid rgba(0, 136, 169, 0.8);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+.content-name {
+  position: absolute;
+  bottom: 5px;
+  left: 0px;
+  transition: all 0.3 ease;
+}
+.text-field input:focus + .label-name .content-name,
+.text-field input:valid + .label-name .content-name {
+  transform: translateY(-150%);
+  font-size: 14px;
+  color: rgba(0, 136, 169, 1);
+}
+.text-field input:focus + .label-name::after,
+.text-field:valid + .label-name::after {
+  transform: translateX(0%);
+}
+/* Radio button styling */
+.radio {
+  font-size: 16px;
+  font-weight: 500;
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  position: relative;
+  padding-left: 30px;
+  cursor: pointer;
+}
+.radio + .radio {
+  margin-left: 20px;
+}
+.radio input[type="radio"] {
+  display: none;
+}
+.radio span {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 3px solid rgba(0, 136, 169, 1);
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0px;
+}
+.radio span:after {
+  content: "";
+  height: 8px;
+  width: 8px;
+  background: rgba(0, 136, 169, 08);
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  transition: 100ms ease 0s;
+}
+.radio input[type="radio"]:checked ~ span:after {
+  transform: translate(-50%, -50%) scale(1);
+}
+/* Checkbox styling */
+.check {
+  font-size: 16px;
+  font-weight: 500;
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  position: relative;
+  padding-left: 22px;
+  cursor: pointer;
+}
+.check + .check {
+  margin-left: 0px;
+  margin-right: 10px;
+}
+.check input[type="checkbox"] {
+  display: none;
+}
+.check span {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 3px solid rgba(0, 136, 169, 1);
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0px;
+}
+.check span:after {
+  content: "";
+  height: 8px;
+  width: 8px;
+  background: rgba(0, 136, 169, 08);
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 50%;
+  transition: 100ms ease 0s;
+}
+.check input[type="checkbox"]:checked ~ span:after {
+  transform: translate(-50%, -50%) scale(1);
+}
+/* Preset page styling */
+/* Styling text fields */
+.preset-text-field {
+  width: 52%;
+  position: relative;
+  height: 50px;
+  overflow: hidden;
+  margin: 0px 450px;
+  text-align: left;
+}
+.preset-text-field input {
+  width: 50%;
+  height: 100%;
+  color: white;
+  padding-top: 20px;
+  border: none;
+  outline: none;
+}
+.preset-text-field label {
+  position: absolute;
+  bottom: 0px;
+  left: 0%;
+  height: 10%;
+  width: 50%;
+  pointer-events: none;
+  border-bottom: 1px solid rgba(0, 136, 169, 0.8);
+}
+.preset-text-field label::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  bottom: -1px;
+  height: 100%;
+  width: 100%;
+  border-bottom: 3px solid rgba(0, 136, 169, 0.8);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+.preset-text-field input:focus + .label-name .content-name,
+.preset-text-field input:valid + .label-name .content-name {
+  transform: translateY(-150%);
+  font-size: 14px;
+  color: rgba(0, 136, 169, 1);
+}
+.preset-text-field input:focus + .label-name::after,
+.preset-text-field:valid + .label-name::after {
+  transform: translateX(0%);
+}
+/* Styling table */
+.preset-table {
+  border-collapse: collapse;
+  font-size: 0.9em;
+  margin: 10px 450px;
+  min-width: 200px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  transform: translate(-50, -50%);
+}
+.preset-table thead tr {
+  background-color: rgba(0, 136, 169, 1);
+  text-align: left;
+  font-weight: bold;
+}
+.preset-table th,
+.preset-table td {
+  padding: 12px 15px;
+}
+.preset-table tbody tr {
+  border-bottom: 1px solid #0088a9;
+}
+.format {
+  display: flex;
+  position: relative;
+  height: 100%;
+  max-width: 100%;
+}
+div #loading {
+  width: 35px;
+  height: 35px;
+  display: none;
+  background: url(/static/img/Loading.gif) no-repeat;
+  cursor: wait;
+}
+.content #BodyA a {
+  text-decoration: underline;
+  font-weight: bold;
+  background-color: #47484c;
+}

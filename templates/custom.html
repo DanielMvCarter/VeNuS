@@ -1,91 +1,33 @@
 {% extends "base.html" %}
 {% block title %}Scan - {% endblock %}
 {% block content %}
+<div id="loading"></div>
 <form action="/start" method="post">
-    <p>To begin a scan, enter details below. </p>
-    <p><input type="text" value="IP Address" name="ip"/></p>
-    <input type="checkbox" id="-A" name="flag" value="-A">
-    <label for="-A">-A</label>
-    <input type="checkbox" id="-sL" name="flag" value="-sL">
-    <label for="-sL">-sL</label>
-    <input type="checkbox" id="-sn" name="flag" value="-sn">
-    <label for="-sn">-sn</label>
-    <input type="checkbox" id="-Pn" name="flag" value="-Pn">
-    <label for="-Pn">-Pn</label>
-    <input type="checkbox" id="-PS" name="flag" value="-PS">
-    <label for="-PS">-PS</label>
-    <input type="checkbox" id="-PA" name="flag" value="-PA">
-    <label for="-PA">-PA</label>
-    <input type="checkbox" id="-PU" name="flag" value="-PU">
-    <label for="-PU">-PU</label>
-    <input type="checkbox" id="-PY" name="flag" value="-PY">
-    <label for="-PY">-PY</label>
-    <input type="checkbox" id="-PE" name="flag" value="-PE">
-    <label for="-PE">-PE</label>
-    <input type="checkbox" id="-PP" name="flag" value="-PP">
-    <label for="-PP">-PP</label>
-    <input type="checkbox" id="-PM" name="flag" value="-PM">
-    <label for="-PM">-PM</label>
-    <input type="checkbox" id="-n" name="flag" value="-n">
-    <label for="-n">-n</label>
-    <input type="checkbox" id="-R" name="flag" value="-R">
-    <label for="-R">-R</label>
-    <input type="checkbox" id="-sS" name="flag" value="-sS">
-    <label for="-sS">-sS</label>
-    <input type="checkbox" id="-sT" name="flag" value="-sT">
-    <label for="-sT">-sT</label>
-    <input type="checkbox" id="-sA" name="flag" value="-sA">
-    <label for="-sA">-sA</label>
-    <input type="checkbox" id="-sW-sM" name="flag" value="-sW-sM">
-    <label for="-sW-sM">-sW-sM</label>
-    <input type="checkbox" id="-sU" name="flag" value="-sU">
-    <label for="-sU">-sU</label>
-    <input type="checkbox" id="-sN" name="flag" value="-sN">
-    <label for="-sN">-sN</label>
-    <input type="checkbox" id="-sF" name="flag" value="-sF">
-    <label for="-sF">-sF</label>
-    <input type="checkbox" id="-sX" name="flag" value="-sX">
-    <label for="-sX">-sX</label>
-    <input type="checkbox" id="-sY" name="flag" value="-sY">
-    <label for="-sY">-sY</label>
-    <input type="checkbox" id="-sZ" name="flag" value="-sZ">
-    <label for="-sZ">-sZ</label>
-    <input type="checkbox" id="-sO" name="flag" value="-sO">
-    <label for="-sO">-sO</label>
-    <input type="checkbox" id="-F" name="flag" value="-F">
-    <label for="-F">-F</label>
-    <input type="checkbox" id="-r" name="flag" value="-r">
-    <label for="-r">-r</label>
-    <input type="checkbox" id="-sV" name="flag" value="-sV">
-    <label for="-sV">-sV</label>
-    <input type="checkbox" id="--version-light" name="flag" value="--version-light">
-    <label for="--version-light">--version-light</label>
-    <input type="checkbox" id="--version-all" name="flag" value="--version-all">
-    <label for="--version-all">--version-all</label>
-    <input type="checkbox" id="--version-trace" name="flag" value="--version-trace">
-    <label for="--version-trace">--version-trace</label>
-    <input type="checkbox" id="-sC" name="flag" value="-sC">
-    <label for="-sC">-sC</label>
-    <input type="checkbox" id="-O" name="flag" value="-O">
-    <label for="-O">-O</label>
-    <input type="checkbox" id="--osscan-limit" name="flag" value="--osscan-limit">
-    <label for="--osscan-limit">--osscan-limit</label>
-    <input type="checkbox" id="--osscan-guess" name="flag" value="--osscan-guess">
-    <label for="--osscan-guess">--osscan-guess</label>
-    <input type="checkbox" id="--min-rtt-timeout" name="flag" value="--min-rtt-timeout">
-    <label for="--min-rtt-timeout">--min-rtt-timeout</label>
-    <input type="checkbox" id="--max-rtt-timeout" name="flag" value="--max-rtt-timeout">
-    <label for="--max-rtt-timeout">--max-rtt-timeout</label>
-    <input type="checkbox" id="-f,-oN" name="flag" value="-f,-oN">
-    <label for="-f,-oN">-f,-oN</label>
-    <input type="checkbox" id="-oX" name="flag" value="-oX">
-    <label for="-oX">-oX</label>
-    <input type="checkbox" id="-oS" name="flag" value="-oS">
-    <label for="-oS">-oS</label>
-    <input type="checkbox" id="-d" name="flag" value="-d">
-    <label for="-d">-d</label>
-    <p><input class="buttons" type="submit" value="Begin Scan"/></p>
+    <p>To begin a scan, enter details below.</p>
+    <div class="text-field">
+        <input type="text"  name="ip" autocomplete="off" required/>
+        <label for="ip" class="label-name">
+            <span class="content-name">IP Address</span>
+        </label>
+    </div>
+    <br>
+    {% for flag in flags %}
+    <label class="check">
+        <input type="checkbox" id={{flag}} name="flag" value={{flag}}>
+        {{flag}}
+        <span></span>
+    </label>
+    {% endfor %}
+    <br>
+    <br>
+    <p><button class="buttons" type="submit" onclick="loading()">Begin Scan</button></p>
 </form>
-
+<br>
 <p>A scan may take some time, perhaps a redirect to the results page or something.</p>
+<p>Need help with flags? Check out the  <a href=https://nmap.org/book/man.html>Nmap man page</a>. </p>
 {% endblock %}
+<script type="text/javascript">
+    function loading() {
+        $("#loading").show();
+        $("#content").hide();
+    }

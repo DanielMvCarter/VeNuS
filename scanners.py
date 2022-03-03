@@ -6,10 +6,12 @@
 # Date created  : 25//08/21
 ###################################
 
-import os, csv ,re,ipaddress, requests, json
+import os, csv ,re,ipaddress, requests, json, datetime
 import multiprocessing as mp
 from bs4 import BeautifulSoup
 from pandas import DataFrame
+import pandas as pd
+import matplotlib.pyplot as plt
 
 ###################################
 # Class Name :NetScan
@@ -173,8 +175,9 @@ class SolScan:
         
     def run(self):
         self.cveDesc()
-        self.cvePatch()
+        self.NISTcvePatch()
         self.write_cveCSV()
+
     #Process the network scan results
     def process_vulners(self):
         print("Processing Vulners")
@@ -240,7 +243,46 @@ class SolScan:
             self.serVulns[service]['desc']= descs
             descs=[]
 
-    def cvePatch(self):
+
+    # def othercvePatch(self):
+    #     print("Scraping for Patches")
+    #     patches=[]
+    #     #Loop through the array for dataframes taking the CVE out
+    #     for service in range(len(self.serVulns)):
+    #         for cve in self.serVulns[service].cve:
+    #             #Track if a patch has been found for the cve
+    #             noPatches = len(patches)
+    #             #Create a get request for each cve webpage
+    #             # https://www.cve.org/CVERecord?id=CVE-2013-2249
+    #             url = 'https://nvd.nist.gov/vuln/detail/'+cve
+    #             result = requests.get(url)
+    #             #Pass through Beautiful soup and search for <td>
+    #             page = BeautifulSoup(result.text, "html.parser")
+    #             text = page.find_all("td")
+    #             for i in text:
+    #                 #Search for a <td> which has a "Patch" in it
+    #                 tags = str(i).split('>')
+    #                 if "Patch</span" in tags:
+    #                     check = tags[0].split("data-testid")
+    #                     #The patches' link is in a related tag but different name so rename
+    #                     if len(check) ==2:
+    #                         realTag = tags[0].replace("resType","link")
+    #             #The first td tag encaptures all subsequent tags so drop and search individually.
+    #             text.pop(0)
+    #             #Re-search through the html with the identified tag
+    #             for i in text:
+    #                 if realTag in str(i):
+    #                     #Once the tag has been found extract the link and append
+    #                     link = " ".join(str(i).split(realTag)).split('"')
+    #                     patches.append(link[1])
+    #             #If no patch has been appended then none were found on the page.
+    #             if noPatches == (len(patches)):
+    #                 patches.append("No Patch Identified")
+    #         #Append the patches to the dataframes
+    #         self.serVulns[service]['Patch']= patches
+    #         patches=[]
+
+    def NISTcvePatch(self):
         print("Scraping for Patches")
         patches=[]
         #Loop through the array for dataframes taking the CVE out
@@ -272,7 +314,7 @@ class SolScan:
                         patches.append(link[1])
                 #If no patch has been appended then none were found on the page.
                 if noPatches == (len(patches)):
-                    patches.append("No Patch Identified")
+                    patches.append("No Solution found")#self.othercvePatch())
             #Append the patches to the dataframes
             self.serVulns[service]['Patch']= patches
             patches=[]
@@ -282,9 +324,48 @@ class SolScan:
         print("Writing CSV")
         for service in range(len(self.serVulns)):
             name =self.serVulns[service].name.split(" ")[0]
+            current_service = []
+            for row in self.serVulns[service]['cve']:
+                current_service.append(name)  
+            self.serVulns[service]["service"]=current_service
             os.system('touch outputs/dfs/'+name+'_out.csv')
             self.serVulns[service].to_csv('outputs/dfs/'+name+'_out.csv')
 
 class Reporting:
-    def __init__(self):
-        self.serVulns = []
+    def __init__(self,folder):
+        self.folder = folder
+        self.data = []
+        self.priorities=[]
+
+    def priority(self):
+        self.priorities = self.data.sort_values(by=['cvss'], ascending=False)[:5]
+        self.priorities =self.priorities.drop(columns=['Unnamed: 0'])
+        self.priorities.to_csv('scans/'+self.folder+'/outputs/dfs/Priority_out.csv')
+
+    def save(self):
+        try:
+            os.path.isdir('scans/'+self.folder)
+            os.system(f"mkdir scans/{self.folder} ; cp -r outputs scans/{self.folder}")
+            os.system('mkdir scans/'+self.folder+'/outputs/graphs')
+        except:
+            now=datetime.datetime.now().strftime("%H:%M-%d:%m:%Y")
+            os.system(f"mkdir scans/{now} ; cp -r outputs scans/{now}")
+            os.system('mkdir scans/'+{now}+'/outputs/graphs')
+        
+    def load_csv_data(self,file):
+        data = pd.read_csv('scans/'+self.folder+'/outputs/dfs/'+file)
+        return data
+
+    def total_data(self):
+        total_data =[]
+        for file in os.listdir('scans/'+self.folder+'/outputs/dfs'):
+            data = self.load_csv_data(file)
+            total_data.append(data)
+        self.data = pd.concat(total_data)
+
+    def create_bar(self):
+        Bar = pd.value_counts(self.data['service'])
+        Bar.plot(kind='bar', 
+                title="Quantity of CVEs per Service",xlabel="Service",ylabel="Quantity of CVEs",
+                rot=45, figsize=(20,10)).grid(True)
+        plt.savefig('scans/'+self.folder+'/outputs/graphs/bar.png')

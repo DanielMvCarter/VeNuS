@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Scan Complete -{% endblock %}
+{% block content %}
+<p>Your scan completed, please enter an out folder name. </p>
+<form action="/results" method="post">
+<div class="text-field">
+    <input type="text"  name="name" autocomplete="off" required/>
+    <label for="name" class="label-name">
+        <span class="content-name">Folder Name</span>
+    </label>
+    </div>
+    <p><button class="buttons" type="submit" >Save Output</button></p>
+</form>
+{% endblock %}

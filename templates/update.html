@@ -3,8 +3,13 @@
 {% block content %}
 <div class="form">
     <form action="/update/{{preset}}" method="POST">
-        <input type="text" name="user_input" id="content" value="{{preset}}">
-        <input type="submit" value="Edit">
+        <div class="text-field">
+        <input type="text" name="user_input" autocomplete="off" required>
+        <label for="user_input" class="label-name">
+            <span class="content-name">{{details}}</span>
+        </label>
+        </div>
+        <input class ="buttons" type="submit" value="Confirm">
     </form>
 </div>
 {% endblock %}

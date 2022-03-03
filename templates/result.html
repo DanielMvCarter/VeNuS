@@ -2,21 +2,26 @@
 {% block title %} Results - {% endblock %}
 {% block content %}
 <p>Once a scan has been run, the results will appear here, you can also view previous scan results to compare improvements in security. </p><br>
-{% for name in name %}
 <div class="format">
-<form action={{folder}} method="post">
-    <ul>
-        <li><input class="services" type="submit" value={{name}} name="file"></button></li>
-    </ul>   
-</form>
-</div>
-<!-- <p>There are a total of XXX vulnerabilities found within the {{name}} service. Of these vulnerabilities, solutions for YYY have been found.</p><br> -->
+{% for name in name %}
+    <form action={{folder}} method="post">
+        <input class="buttons" type="submit" value={{name}} name="file"></button>
+    </form>
 {% endfor %}
+</div>
 <br>
 {% if results|length <1 %}
 <p></p>
 {% else %}
+<h1>Results for {{file}}</h1>
 <table class="content-table">
+    <colgroup>
+        <col style="width:5%">
+        <col style="width:10%">
+        <col style="width:5%">
+        <col style="width:50%">
+        <col style="width:30%">
+      </colgroup> 
     <thead>
         <tr>
             <th>Vulnerability</th>

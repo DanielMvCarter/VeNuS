@@ -5,30 +5,36 @@
     {% if presets|length < 1 %}
     <h4 style="text-align: center">There are no presets. Create one below!</h4>
     {% else %}
-    <table>
+    <table class="preset-table">
         <tr>
             <th>Name</th>
             <th>Details</th>
             <th>Actions</th>
         </tr>
-        {{presets}}
         {% for preset in presets %}
             <tr>
                 <td>{{presets[preset]["Name"]}}</td>
                 <td>{{presets[preset]["Details"]}}</td>
                 <td>
-                    <a href="/update/{{preset}}">Update</a>
+                    <a class="small_button" href="/update/{{preset}}">Update</a>
                     <br>
-                    <a href="/delete/{{preset}}">Delete</a>
+                    <a class="small_button" href="/delete/{{preset}}">Delete</a>
                 </td>
             </tr>
         {% endfor %}
     </table>
     {% endif %}
+    <br>
     <div class="form">
         <form action="/presets" method="POST">
-            <input type="text" name="user_input" id="content" value="Preset name: IP address Flags ">
-            <input type="submit" value="Add Preset">
+            <div class="preset-text-field">
+            <input type="text" name="user_input" autocomplete="off" required>
+            <label for="user_input" class="label-name">
+                <span class="content-name">Preset name: IP address Flags</span>
+            </label>
+            </div>
+            <br>
+            <input class="buttons" type="submit" value="Add Preset">
         </form>
     </div>
 </div>

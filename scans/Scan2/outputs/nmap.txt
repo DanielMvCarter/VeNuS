@@ -1,0 +1,2 @@
+# Nmap 7.92 scan initiated Tue Mar  1 14:54:39 2022 as: nmap -oN outputs/nmap.txt -A -T4 -sV --version-all 192.168.221.152
+# Nmap done at Tue Mar  1 14:54:41 2022 -- 1 IP address (0 hosts up) scanned in 2.64 seconds

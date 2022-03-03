@@ -1,5 +1,5 @@
-import os, ipaddress, json, datetime
-from tools import NetScan, VulnScan, SolScan
+import os, ipaddress, json
+from scanners import NetScan, VulnScan, SolScan,Reporting
 
 
 def init_system():
@@ -49,7 +49,7 @@ def input_valid(input):
             input = " ".join(input)
             return input
 
-def start(input):
+def scan(input):
     init_system()
     netScan = NetScan(input_valid(input))
     netScan.run()
@@ -58,5 +58,15 @@ def start(input):
     solScan = SolScan()
     solScan.process_vulners()
     solScan.run()
-    now = str(datetime.datetime.now()).replace(" ", ":")
-    os.system(f"mkdir scans/{now} ; cp -r outputs scans/{now}")
+    
+def reporting(input):
+    report=Reporting(input)
+    report.save()
+    report.total_data()
+    report.create_bar()
+    report.priority()
+
+# report=Reporting('besakdjw')
+# report.save()
+# report.total_data()
+# report.criticalVulns()

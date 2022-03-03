@@ -1,38 +1,63 @@
 {% extends "base.html" %}
 {% block title %}Scan - {% endblock %}
 {% block content %}
-<form action="start" method="post">
-    <p>To begin a scan, enter details below. </p>
-    <p><input type="text" value="IP Address" name="ip"/></p>
-    <input type="radio" id="Standard" name="depth" value="Standard">
-    <label for="Standard">Standard</label>
-    <input type="radio" id="Light" name="depth" value="Light">
-    <label for="Light">Light</label>
-    <input type="radio" id="Intrusive" name="depth" value="Intrusive">
-    <label for="Intrusive">Intrusive</label>
-    <p><input class="buttons" type="submit" value="Begin Scan"/></p>
+<div id="loading"><p>A scan may take some time, perhaps a redirect to the results page or something.</p></div>
+<div id="hide">
+<form action="complete" method="post">
+    <p>To begin a scan, enter details below.</p>
+    <br>
+    <div class="text-field">
+    <input type="text"  name="ip" autocomplete="off" required/>
+    <label for="ip" class="label-name">
+        <span class="content-name">IP Address</span>
+    </label>
+    </div>
+    <br>
+    <div class ="radio-group">
+    <label class = "radio">
+        <input type = "radio" value = "Standard" name = "depth">
+        Standard
+        <span></span>
+    </label>
+    <label class = "radio">
+        <input type = "radio" value = "Light" name = "depth">
+        Light
+        <span></span>
+    </label>
+    <label class = "radio">
+        <input type = "radio" value = "Intrusive" name = "depth">
+        Intrusive
+        <span></span>
+    </label>
+    </div>
+    <br>
+    <p><button class="buttons" type="submit" onclick="loading()">Begin Scan</button></p>
 </form>
 <br>
+<p>If you are an advanced user, you can perform a custom scan</p>
+<div class="formaty">
+    <form action="scan/custom" method="get">
+        <button class="buttons" type="submit">Custom Scan</button>
+    </form>
+</div>
 <br>
 <br>
-<p>Alternatively, select one of your presets. These can be updated <a href=/presets>here</a>. </p>
-<form action="start" method="post">
+<p id="BodyA">Alternatively, select one of your presets. These can be updated <a href=/presets>here</a>.</p>
+<form action="complete" method="post">
 <div class="dropdown">
-    <button class="dropbtn">⌄ Presets ⌄</button>
+    <button class="buttons">⌄ Presets ⌄</button>
     <div class="dropdown-content">
         {% for preset in presets %}
-    <input class="buttons" type="submit" value={{presets[preset]['Name']}} name="ip"/>
+            <button class="buttons" type="submit" name="ip" onclick="loading()">{{presets[preset]['Name']}}</button>
         {% endfor %}
     </div>
   </div>
 </form>
 <br>
-<br>
-<br>
-<div class="format">
-    <form action="scan/custom" method="get">
-        <button type="submit">Custom Scan</button>
-    </form>
 </div>
-<p>A scan may take some time, perhaps a redirect to the results page or something.</p>
 {% endblock %}
+<script type="text/javascript">
+    function loading() {
+        $("#loading").show();
+        $("#hide").hide();
+    }
